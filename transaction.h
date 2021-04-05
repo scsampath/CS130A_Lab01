@@ -33,7 +33,7 @@ private :
     int amount ; //amount of money that has been transferred
     string sender; //sender of money
     string reciever; //reciever of money
-    string nonce; //random string that will be use to simulate PoW
+    string nonce = ""; //random string that will be use to simulate PoW
     string hash; //hash of content of previous transaction
 };
 

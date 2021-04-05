@@ -40,6 +40,7 @@ int main() {
             Transaction *add = new Transaction(amount, sender, reciever);
             add->setPrev(head);
             head = add;
+            head->add(amount, sender, reciever);
         }
         else if(input == 2) {
             string personName;
