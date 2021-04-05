@@ -25,8 +25,7 @@ string SHA256(const string str)
 }
 
 char randChar() {
-    srand(time(NULL));
-    return char(rand() % 26 + 97);
+    return char(rand() % 26 + 'a');
 }
 
 Transaction::Transaction() {
@@ -45,11 +44,14 @@ void Transaction::add(int amount, string sender, string reciever){
         this->nonce = randChar();
     } else {
         string shaHash = "";
+        string prevNonce = "";
+        srand(time(NULL));
         do{
-            shaHash = SHA256(to_string(this->prev->amount) + this->prev->sender + this->prev->reciever + this->prev->hash + this->prev->nonce);
-            this->prev->nonce = randChar();
+            prevNonce = randChar();
+            shaHash = SHA256(to_string(this->prev->amount) + this->prev->sender + this->prev->reciever + this->prev->hash + prevNonce);
         } while (shaHash[shaHash.length() - 1] != '0');
         this->hash = shaHash;
+        this->prev->nonce = prevNonce;
         this->nonce = randChar();
     }
 }
@@ -102,8 +104,8 @@ int Transaction::getBalance(string person){
         current = current->prev;
     }
     return balance;
-
 }
+
 void Transaction::print(){
     if (this == NULL)
     {
