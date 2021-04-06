@@ -5,10 +5,10 @@
 #include <string>
 #include <openssl/sha.h>
 
-#include <cstdlib> // f o r rand ( )
-#include <iostream> // f o r t ime ( )
+#include <cstdlib> 
+#include <iostream> 
 
-// adapted from: https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c/10632725
+//Using code from TA Sean Gillen which was adapted from: https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c/10632725
 string SHA256(const string str)
 {
     unsigned char hash[SHA256_DIGEST_LENGTH];
@@ -41,19 +41,18 @@ Transaction::Transaction(int amount, string sender, string reciever) {
 void Transaction::add(int amount, string sender, string reciever){
     if(this->prev == NULL){
         this->hash = "NULL";
-        this->nonce = randChar();
     } else {
-        string shaHash = "";
-        string prevNonce = "";
-        srand(time(NULL));
-        do{
-            prevNonce = randChar();
-            shaHash = SHA256(to_string(this->prev->amount) + this->prev->sender + this->prev->reciever + this->prev->hash + prevNonce);
-        } while (shaHash[shaHash.length() - 1] != '0');
-        this->hash = shaHash;
-        this->prev->nonce = prevNonce;
-        this->nonce = randChar();
+        this->hash = SHA256(to_string(this->prev->amount) + this->prev->sender + this->prev->reciever + this->prev->hash);
     }
+        
+    srand(time(NULL));
+    string noncePoW = "";
+    string shaHash = "";
+    do {
+        noncePoW = randChar();
+        shaHash = SHA256(to_string(this->amount) + this->sender + this->reciever + this->hash + noncePoW);
+    } while (shaHash[shaHash.length() - 1] != '0');
+    this->nonce = noncePoW;
 }
 
 void Transaction::setPrev(Transaction *prev){

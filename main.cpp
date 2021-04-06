@@ -41,6 +41,7 @@ int main() {
             add->setPrev(head);
             head = add;
             head->add(amount, sender, reciever);
+            cout<<"Transaction complete!"<<endl;
         }
         else if(input == 2) {
             string personName;
