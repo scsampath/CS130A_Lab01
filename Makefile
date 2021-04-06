@@ -5,7 +5,6 @@ CXXFLAGS=-g -Wall -std=c++11 -I/usr/lib64/ -I/usr/local/lib64/python3.8/site-pac
 
 all: main.o transaction.o
 	$(CXX) $(CXXFLAGS) -o main main.o transaction.o
-	./main
 
 main.o: main.cpp
     $(CXX) $(CXXFLAGS) -c main.cpp
