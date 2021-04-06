@@ -5,9 +5,6 @@
 #include <string>
 #include <openssl/sha.h>
 
-#include <cstdlib> 
-#include <iostream> 
-
 //Using code from TA Sean Gillen which was adapted from: https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c/10632725
 string SHA256(const string str)
 {
