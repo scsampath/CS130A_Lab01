@@ -39,6 +39,7 @@ void Transaction::add(int amount, string sender, string reciever){
     if(this->prev == NULL){
         this->hash = "NULL";
     } else {
+        //this->hash = SHA256(to_string(this->prev->amount) + this->prev->sender + this->prev->reciever + this->prev->hash);
         this->hash = SHA256(to_string(this->prev->amount) + this->prev->sender + this->prev->reciever + this->prev->hash + this->prev->nonce);
     }
         
@@ -52,11 +53,12 @@ void Transaction::add(int amount, string sender, string reciever){
         } else {
             noncePoW = randChar();
         }
-        shaHash = SHA256(to_string(this->amount) + this->sender + this->reciever + this->hash + noncePoW);
+        shaHash = SHA256(to_string(this->amount) + this->sender + this->reciever + noncePoW);
         counter++;
     } while (shaHash[shaHash.length() - 1] != '0');
     this->nonce = noncePoW;
-    cout << SHA256(to_string(this->amount) + this->sender + this->reciever + this->hash + this->nonce) <<endl;
+    //code to check
+    //cout << SHA256(to_string(this->amount) + this->sender + this->reciever + this->nonce) <<endl;
 }
 
 void Transaction::setPrev(Transaction *prev){
