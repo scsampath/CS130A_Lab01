@@ -45,9 +45,15 @@ void Transaction::add(int amount, string sender, string reciever){
     srand(time(NULL));
     string noncePoW = "";
     string shaHash = "";
+    int counter = 0;
     do {
-        noncePoW = randChar();
+        if(counter > 100){
+            noncePoW += randChar();
+        } else {
+            noncePoW = randChar();
+        }
         shaHash = SHA256(to_string(this->amount) + this->sender + this->reciever + this->hash + noncePoW);
+        counter++;
     } while (shaHash[shaHash.length() - 1] != '0');
     this->nonce = noncePoW;
 }
