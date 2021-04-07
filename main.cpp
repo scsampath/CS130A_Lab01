@@ -35,7 +35,7 @@ int main() {
                 }
             }
             cout << "Sender name: " <<endl, cin >> sender;
-            cout << "Reciever name: " <<endl, cin >> reciever;
+            cout << "Receiver name: " <<endl, cin >> reciever;
 
             Transaction *add = new Transaction(amount, sender, reciever);
             add->setPrev(head);
