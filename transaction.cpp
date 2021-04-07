@@ -117,7 +117,7 @@ void Transaction::print(){
     this->prev->print();
     cout << "Amount: " << this->amount <<endl;
     cout << "Sender: " << this->sender <<endl;
-    cout << "Reciever: " << this->reciever <<endl;
+    cout << "Receiver: " << this->reciever <<endl;
     cout << "Nonce: " << this->nonce <<endl;
     cout << "Hash: " << this->hash <<endl;
 }
